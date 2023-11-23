@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoiceData } from 'src/models/InvoiceData';
-import { ListingServices } from 'src/services/ListingServices';
+import { ListingServices } from 'src/ApiServices/ListingServices';
+import { InvoiceService } from 'src/ApiServices/InvoiceService';
 
 @Component({
   selector: 'app-table',
@@ -20,7 +21,7 @@ export class TableComponent implements OnInit {
   dataToChild:any;
 
 
-  constructor(private service: ListingServices) {}
+  constructor(private service: ListingServices,private invoiceService:InvoiceService) {}
   ngOnInit(): void {
     this.loadAllInvoices(this.pageNumber, this.pageSize, this.sortBy, this.sortDirection);
   }
@@ -59,7 +60,10 @@ export class TableComponent implements OnInit {
 
   DeleteData(deleteData : InvoiceData)
   {
-    
+    this.invoiceService.deleteInvoice(deleteData.id).subscribe((res)=>{
+      this.loadAllInvoices(this.pageNumber, this.pageSize, this.sortBy, this.sortDirection)
+      
+    })
 
   }
 

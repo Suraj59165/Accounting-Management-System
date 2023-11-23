@@ -68,5 +68,5 @@ export class ItemTableComponent implements OnInit {
     }
   }
 
-  calculateValue(changedValue: any, index: number) {}
+ 
 }

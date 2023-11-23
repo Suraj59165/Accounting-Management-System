@@ -10,18 +10,25 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form #invoiceData="ngForm">
+          <div>
           <label>Choose date-</label>
-          <input type="date" name="date" class="m-2 form-control row g-3" ngModel />
+        
+          <input #invoiceDate="ngModel" type="date" required name="date" class="m-2 form-control row g-3" ngModel />
 
-          <label>InvoiceNumber-</label>
-          <input type="number" name="invoiceNumber" class="m-2 form-control row g-3" ngModel />
+          <small [class.d-none]="invoiceDate.valid || invoiceDate.untouched">date is required</small>
+        </div>
+
+          <label>Invoice Number-</label>
+          <input #invoiceNumber="ngModel" required type="number" name="invoiceNumber" class="m-2 form-control row g-3" ngModel />
+          <small [class.d-none]="invoiceNumber.valid || invoiceNumber.untouched">Invoice number is required</small>
+          
         </form>
       </div>
     </div>
   </nav>
 
   <div>
-    <form #customerForm="ngForm" class="row g-3 mt-2">
+    <form #customerForm="ngForm"  class="row g-3 mt-2">
       <h3>choose customer</h3>
       <div class="col-auto">
         <select class="form-control" name="id" [(ngModel)]="customerData.id" (ngModelChange)="trackInputChanges()">
@@ -67,6 +74,9 @@
       <button class="btn btn-sm btn-success m-1" (click)="submit(customerForm.value, invoiceData.value)">
         Submit
       </button>
+      <div *ngIf="!customerForm.valid" class="text-danger mt-2">
+        Please fix all errors before submitting the form.
+      </div>
     </form>
   </div>
 </div>

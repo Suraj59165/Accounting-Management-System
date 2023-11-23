@@ -25,4 +25,15 @@ export class InvoiceService{
         const options = { headers: headers };
         return this.http.post('http://localhost:8080/items', invoiceItems, options)
     }
+
+    deleteInvoice(invoiceId:any)
+    {
+        
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        const options = { headers: headers };
+        return this.http.delete('http://localhost:8080/invoice/'+invoiceId, options)
+
+    }
 }

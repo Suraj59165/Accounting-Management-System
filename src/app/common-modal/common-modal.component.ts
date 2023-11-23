@@ -1,9 +1,10 @@
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ListingServices } from 'src/services/ListingServices';
+import { ListingServices } from 'src/ApiServices/ListingServices';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { animate } from '@angular/animations';
+import { InvoiceService } from 'src/ApiServices/InvoiceService';
 
 @Component({
   selector: 'app-common-modal',
@@ -16,7 +17,7 @@ export class CommonModalComponent {
   tempData:any;
   modalRef:any;
 
-  constructor(private modalService: NgbModal,private apiService:ListingServices) {}
+  constructor(private modalService: NgbModal,private invoiceService:InvoiceService,private apiService:ListingServices) {}
 
  
   trackInputChanges(changedValue: any, index: number) {

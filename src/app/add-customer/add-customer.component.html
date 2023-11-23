@@ -4,7 +4,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-8">
-            name <input matInput type="text" name="name" [(ngModel)]="customerData.name"  />
+            name <input matInput type="text" #name="ngModel" [class.is-invalid]="name.invalid" required name="name" [(ngModel)]="customerData.name" class="form-control" />
 
             Email <input matInput type="text" name="email" [(ngModel)]="customerData.email" />
 
