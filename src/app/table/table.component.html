@@ -1,0 +1,68 @@
+<app-common-modal [dataFromParent]="dataToChild"></app-common-modal>
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+ 
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+  
+    <div class="collapse navbar-collapse justify-content-end m-3" id="navbarSupportedContent">
+   
+      
+      <form class="form-inline my-2 my-lg-0">
+        
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+       
+    </form>
+    
+    </div>
+  </nav>
+<table mat-table [dataSource]="actualData" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="invoiceNumber">
+    <th mat-header-cell *matHeaderCellDef class="text-center"> Invoice No </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{element?.invoiceNumber}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef class="text-center"> Creation Date </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{element?.createdAt}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="customerName">
+    <th mat-header-cell *matHeaderCellDef class="text-center"> Customer Name </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{element?.customerName}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="itemQuantity">
+    <th mat-header-cell *matHeaderCellDef class="text-center"> Total Items </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{countTotal(element?.invoiceItems,'itemQuantity')}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="itemFinalPrice">
+    <th mat-header-cell *matHeaderCellDef class="text-center"> Total Price </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{countTotal(element?.invoiceItems,'itemFinalPrice')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button class="btn btn-primary m-1" (click)="viewData(element)" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">View</button>
+      <button class="btn btn-danger m-1" (click)="EditData(element)" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Edit</button>
+      <button class="btn btn-danger m-1" (click)="DeleteData(element)" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>

@@ -1,0 +1,58 @@
+<ng-template #openPopUp let-modal>
+  <div class="modal-body">
+    <form #simpleform="ngForm" validate (ngSubmit)="updateData()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-8">
+
+            Invoice Number <input matInput type="text" name="invoiceNumber" [(ngModel)]="invoiceData.invoiceNumber"  >
+           
+            Customer Name <input matInput type="text" name="customerName" [(ngModel)]="invoiceData.customerName" >
+            
+            Creation Date <input matInput type="text" name="createdAt" [(ngModel)]="invoiceData.createdAt"  >
+            
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2" *ngFor="let items of invoiceData.invoiceItems;let i = index">
+        <div class="col">
+          <label>Name</label>
+          <input name="itemName{{i}}" [(ngModel)]="items.itemName">
+        </div>
+        <div class="col">
+          <label>Price</label>
+          <input name="itemSalesPrice{{i}}" [(ngModel)]="items.itemSalesPrice" (ngModelChange)="trackInputChanges($event, i)">
+        </div>
+        <div class="col">
+          <label>offer(%)</label>
+          <input name="itemOffer{{i}}" [(ngModel)]="items.itemOffer" (ngModelChange)="trackInputChanges($event, i)" >
+        </div>
+        <div class="col">
+          <label>Quantity</label>
+          <input name="itemQuantity{{i}}" [(ngModel)]="items.itemQuantity" (ngModelChange)="trackInputChanges($event, i)">
+        </div>
+        <div class="col">
+          <label>Tax(%)</label>
+          <input name="itemTax{{i}}"[(ngModel)]="items.itemTax" (ngModelChange)="trackInputChanges($event, i)"  >
+        </div>
+        <div class="col">
+          <label>Final Amount</label>
+          <input name="itemFinalPrice{{i}}" [(ngModel)]="items.itemFinalPrice" (ngModelChange)="trackInputChanges($event, i)" >
+        </div>
+
+    
+        <div class="col">
+         <button class="btn btn-danger btn-sm mt-3" (click)="deleteItem(items.id)">delete</button>
+         
+          
+        </div>
+
+      </div>
+      <button class="btn btn-success btn-sm mt-2" >Update</button>
+      <button class="btn btn-secondary btn-sm mt-2 ms-2" (click)="modal.close('save click')">Close</button>
+
+
+    </form>
+
+  </div>
+</ng-template>

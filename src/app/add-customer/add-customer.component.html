@@ -1,0 +1,34 @@
+<ng-template #customerModal let-modal>
+  <div class="modal-body">
+    <form #simpleForm="ngForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-8">
+            name <input matInput type="text" name="name" [(ngModel)]="customerData.name"  />
+
+            Email <input matInput type="text" name="email" [(ngModel)]="customerData.email" />
+
+            Phone <input matInput type="text" name="phone" [(ngModel)]="customerData.phone" />
+
+            Address <input matInput type="text" name="address" [(ngModel)]="customerData.address" />
+
+            Notes <input matInput type="text" name="notes" [(ngModel)]="customerData.notes" />
+
+            <button
+              class="btn btn-primary p-1"
+              (click)="submitForm(simpleForm.value)"
+            >
+              Add
+            </button>
+            <button
+              class="btn btn-secondary m-2 p-1"
+              (click)="modal.close('Save click')"
+            >
+              close
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <table class="table table-bordered m-2">
+    <thead>
+      <tr>
+        <th scope="col">Item Name</th>
+        <th scope="col">Sale Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Offer(%)</th>
+        <th scope="col">Tax(%)</th>
+        <th scope="col">Final Price</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let itemRow of itemRows; let i = index">
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="itemRow.itemName"
+            name="itemName{{ i }}"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="itemRow.salePrice"
+            name="itemSalePrice{{ i }}"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="itemRow.quantity"
+            name="itemQuantity{{ i }}"
+          />
+        </td>
+        <td>
+
+          <input type="text" [(ngModel)]="itemRow.offer" class="form-control" name="itemOffer{{ i }}" />
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="itemRow.tax" class="form-control" name="itemTax{{ i }}" />
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="itemRow.finalPrice"
+            name="itemFinalPrice{{ i }}"
+          />
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteRow(i)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+    <div class="m-2">
+      <button class="btn btn-sm btn-danger" (click)="addRow()">Add Row</button>
+
+    </div>
+   
+
+  </table>
+</div>
