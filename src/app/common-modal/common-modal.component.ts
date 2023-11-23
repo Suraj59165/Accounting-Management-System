@@ -18,8 +18,7 @@ export class CommonModalComponent {
 
   constructor(private modalService: NgbModal,private apiService:ListingServices) {}
 
-  submitForm(formData: any, form: NgForm) {}
-
+ 
   trackInputChanges(changedValue: any, index: number) {
     const SaleOrQuantityTotal=this.invoiceData.invoiceItems[index].itemQuantity *
     this.invoiceData.invoiceItems[index].itemSalesPrice;

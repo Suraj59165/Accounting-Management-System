@@ -19,6 +19,7 @@ import {MatInputModule} from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddItemsComponent } from './add-items/add-items.component';
 import { ItemTableComponent } from './item-table/item-table.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { ItemTableComponent } from './item-table/item-table.component';
     ItemTableComponent
   ],
   imports: [
+    MatSnackBarModule,
     MatInputModule,
     MatAutocompleteModule,
     HttpClientModule,

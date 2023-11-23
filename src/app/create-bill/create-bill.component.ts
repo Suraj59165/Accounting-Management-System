@@ -5,6 +5,8 @@ import { CustomerData } from "src/models/CustomerData";
 import { CustomerService } from "src/ApiServices/CustomerService";
 import { ItemTableComponent } from "../item-table/item-table.component";
 import { InvoiceData } from "src/models/InvoiceData";
+import { InvoiceService } from "src/ApiServices/InvoiceService";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-create-bill",
@@ -21,7 +23,7 @@ export class CreateBillComponent implements OnInit {
   @ViewChild(ItemTableComponent, { static: false })
   itemTable!: ItemTableComponent;
 
-  constructor(private customerService: CustomerService) {}
+  constructor(private customerService: CustomerService,private invoiceService:InvoiceService,private snackBar :MatSnackBar) {}
   ngOnInit(): void {
     this.customerService.getAllCustomers().subscribe((res) => {
       this.customerData = res;
@@ -49,12 +51,13 @@ export class CreateBillComponent implements OnInit {
 
   submit(customerData: any, invoiceData: any) {
     const tableData = this.itemTable.getTableData();
-    console.log("Invoice items Data:", tableData);
-    console.log("invoice Data:", invoiceData);
-    console.log("Customer Data:", customerData);
-    console.log('final data')
     invoiceData=new InvoiceData('null',invoiceData.invoiceNumber,invoiceData.date,customerData.name,tableData,customerData.id)
-    console.log(invoiceData)
+    this.invoiceService.createInvoiceOfCustomer(invoiceData).subscribe((response)=>{
+      window.location.reload();
+      this.snackBar.open("invoice created successfully")
+
+    })
+    
     
   }
 

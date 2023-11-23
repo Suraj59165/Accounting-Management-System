@@ -22,6 +22,7 @@
 
   <div>
     <form #customerForm="ngForm" class="row g-3 mt-2">
+      <h3>choose customer</h3>
       <div class="col-auto">
         <select class="form-control" name="id" [(ngModel)]="customerData.id" (ngModelChange)="trackInputChanges()">
           <option *ngFor="let customer of customerData.content" [value]="customer.id">
@@ -62,7 +63,7 @@
       </div>
 
       <h4 class="mt-5">Add Items-</h4>
-      <app-item-table></app-item-table>
+      <app-item-table [flag]="true"></app-item-table>
       <button class="btn btn-sm btn-success m-1" (click)="submit(customerForm.value, invoiceData.value)">
         Submit
       </button>

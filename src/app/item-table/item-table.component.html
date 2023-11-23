@@ -4,7 +4,7 @@
       <tr>
         <th scope="col">Item Name</th>
         <th scope="col">Sale Price</th>
-        <th scope="col">Quantity</th>
+        <th  *ngIf="flag===true" scope="col">Quantity</th>
         <th scope="col">Offer(%)</th>
         <th scope="col">Tax(%)</th>
         <th scope="col">Final Price</th>
@@ -12,44 +12,51 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let itemRow of itemRows; let i = index">
+      <tr *ngFor="let items of invoiceItems let i = index">
         <td>
           <input
             type="text"
             class="form-control"
-            [(ngModel)]="itemRow.itemName"
+            [(ngModel)]="items.itemName"
             name="itemName{{ i }}"
           />
         </td>
         <td>
           <input
-            type="text"
+            type="number"
             class="form-control"
-            [(ngModel)]="itemRow.salePrice"
-            name="itemSalePrice{{ i }}"
+            [(ngModel)]="items.itemSalesPrice"
+            name="itemSalesPrice{{ i }}"
+            (ngModelChange)="trackInputChanges($event, i)"
+            
           />
         </td>
-        <td>
+        <td  *ngIf="flag===true">
           <input
-            type="text"
+         
+            type="number"
             class="form-control"
-            [(ngModel)]="itemRow.quantity"
+            [(ngModel)]="items.itemQuantity"
+            
             name="itemQuantity{{ i }}"
+            (ngModelChange)="trackInputChanges($event, i)"
           />
         </td>
         <td>
 
-          <input type="text" [(ngModel)]="itemRow.offer" class="form-control" name="itemOffer{{ i }}" />
+          <input type="number" [(ngModel)]="items.itemOffer" (ngModelChange)="trackInputChanges($event, i)" class="form-control" name="itemOffer{{ i }}" />
         </td>
         <td>
-          <input type="text" [(ngModel)]="itemRow.tax" class="form-control" name="itemTax{{ i }}" />
+          <input type="number" [(ngModel)]="items.itemTax" (ngModelChange)="trackInputChanges($event, i)" class="form-control" name="itemTax{{ i }}" />
         </td>
         <td>
           <input
-            type="text"
+            type="number"
             class="form-control"
-            [(ngModel)]="itemRow.finalPrice"
+            [(ngModel)]="items.itemFinalPrice"
             name="itemFinalPrice{{ i }}"
+            readonly
+            (ngModelChange)="trackInputChanges($event, i)"
           />
         </td>
         <td>

@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   }
   openCreateBillComponent()
   {
+    const flag=true;
     console.log("invoked create bill")
    this.router.navigateByUrl('/create-bill')
   }

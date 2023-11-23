@@ -6,7 +6,7 @@ import { AddItemsComponent } from './add-items/add-items.component';
 
 const routes: Routes = [
   {
-    path:'create-bill',
+    path:'create-invoice',
     component:CreateBillComponent
   },
 
