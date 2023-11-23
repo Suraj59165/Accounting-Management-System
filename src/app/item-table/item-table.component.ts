@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { InvoiceService } from "src/ApiServices/InvoiceService";
 
 @Component({
   selector: "app-item-table",
@@ -8,8 +9,14 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class ItemTableComponent implements OnInit {
   @Input() flag: any;
-  constructor(private activeRoute: ActivatedRoute) {}
-  ngOnInit(): void {}
+  constructor(private activeRoute: ActivatedRoute,private invoiceService:InvoiceService) {}
+  ngOnInit(): void {
+    this.loadInvoiceItems()
+    console.log(this.loadInvoiceItems)
+  }
+  invoiceItemsData:any;
+  tempInvoiceItemData:any;
+  tempItem:any;
 
   invoiceItems: any[] = [
     {
@@ -23,6 +30,39 @@ export class ItemTableComponent implements OnInit {
   ];
   deleteRow(index: number) {
     this.invoiceItems.splice(index, 1);
+  }
+
+  trackChanges(index:any)
+  {
+    for (let i = 0; i < this.tempInvoiceItemData.content.length; i++) {
+      this.tempItem = this.tempInvoiceItemData.content[i];
+      console.log(this.tempItem)
+      console.log(this.invoiceItemsData.id)
+      if (this.invoiceItemsData.id === this.tempItem.id) {
+        console.log("matched")
+        this.invoiceItems[index].itemName= this.tempItem.itemName;
+        this.invoiceItems[index].itemTax= this.tempItem.itemTax;
+        this.invoiceItems[index].itemOffer= this.tempItem.itemOffer;
+        this.invoiceItems[index].itemSalesPrice= this.tempItem.itemSalesPrice;
+        this.invoiceItems[index].itemQuantity= this.tempItem.itemQuantity;
+        this.invoiceItems[index].itemFinalPrice= this.tempItem.itemFinalPrice;
+        
+        
+        break;
+      }
+    }
+   
+  }
+
+  loadInvoiceItems()
+  {
+    this.invoiceService.getAllItems().subscribe((response)=>{
+      console.log(response)
+      this.invoiceItemsData=response;
+      this.tempInvoiceItemData=response
+      
+    })
+
   }
   addRow() {
     this.invoiceItems.push({

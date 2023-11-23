@@ -36,4 +36,13 @@ export class InvoiceService{
         return this.http.delete('http://localhost:8080/invoice/'+invoiceId, options)
 
     }
+
+    getAllItems(){
+        
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        const options = { headers: headers };
+        return this.http.get('http://localhost:8080/items', options)
+    }
 }

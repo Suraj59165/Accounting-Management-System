@@ -71,7 +71,7 @@
 
       <h4 class="mt-5">Add Items-</h4>
       <app-item-table [flag]="true"></app-item-table>
-      <button class="btn btn-sm btn-success m-1" (click)="submit(customerForm.value, invoiceData.value)">
+      <button class="btn btn-sm btn-success m-1 col-md-1 ms-3" (click)="submit(customerForm.value, invoiceData.value)">
         Submit
       </button>
       <div *ngIf="!customerForm.valid" class="text-danger mt-2">

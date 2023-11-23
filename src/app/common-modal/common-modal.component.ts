@@ -60,10 +60,8 @@ export class CommonModalComponent {
 
   deleteItem(invoiceItemId:any)
   {
-    console.log(invoiceItemId)
     this.apiService.deleteInvoiceItems(invoiceItemId).subscribe((res)=>{
-      this.dataFromParent(this.tempData)
-      
+      this.openModal(this.openPopUp);
     })
   }
 

@@ -53,9 +53,9 @@ export class CreateBillComponent implements OnInit {
     const tableData = this.itemTable.getTableData();
     invoiceData=new InvoiceData('null',invoiceData.invoiceNumber,invoiceData.date,customerData.name,tableData,customerData.id)
     this.invoiceService.createInvoiceOfCustomer(invoiceData).subscribe((response)=>{
-      invoiceData=new InvoiceData('',invoiceData.invoiceNumber+1,new Date,'',[],'')
-      invoiceData.invoiceNumber=234
+      
       this.snackBar.open("invoice created successfully")
+      window.location.reload()
 
     })
   }
