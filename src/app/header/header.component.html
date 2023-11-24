@@ -1,4 +1,5 @@
-
+<app-add-customer [dataInaddCustomer]="dataFromHeader"></app-add-customer>
+<app-add-items [dataInAddItems]="dataFromHeaderComponent" ></app-add-items>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Accounting Management System</a>
@@ -10,7 +11,8 @@
       
       </ul>
       <form class="d-flex">
-        <button class="btn btn-success text-white m-2"  routerLink="add-items"  type="button">Add Items</button>
+        <button class="btn btn-success text-white m-2"   (click)="openAddCustomerPopUp()" type="button">Add Customer</button>
+        <button class="btn btn-success text-white m-2" (click)="openAddItemPopUp()"   type="button">Add Items</button>
         <button class="btn btn-danger text-white m-2" routerLink="create-invoice"  type="button">Create invoice</button>
       </form>
     </div>

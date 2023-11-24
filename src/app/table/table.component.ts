@@ -13,6 +13,7 @@ import { InvoiceService } from 'src/ApiServices/InvoiceService';
 export class TableComponent implements OnInit {
 
   actualData: InvoiceData[] = [];
+  
   displayedColumns: string[] = ['invoiceNumber', 'customerName', 'createdAt', 'itemQuantity', 'itemFinalPrice','Action'];
   pageNumber: number = 0;
   pageSize: number = 10;

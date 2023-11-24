@@ -1,5 +1,47 @@
-<div class="container-fluid">
-
-    <app-item-table/>
-    <button class="btn btn-outline-success btn-sm ms-4" (click)="addInvoiceItems()">submit</button>
-</div>
+<ng-template #addItemModal let-modal>
+    <div class="card">
+      <div class="card-header">
+        Add Item Details
+      </div>
+    
+        <div class="modal-body">
+          <form #addItemForm="ngForm" >
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-8">
+                  <label> Item Name</label>
+                  <input  type="text" class="form-control"  name="itemName" [(ngModel)]="items.itemName" />
+      
+                  <label> Item Sale Price</label>
+                   <input  type="number" class="form-control" name="itemSalesPrice" [(ngModel)]="items.itemSalesPrice"  (ngModelChange)="trackInputChanges()" />
+      
+                  <label> Item Offer</label>
+                   <input  type="number" class="form-control" name="itemOffer" [(ngModel)]="items.itemOffer" (ngModelChange)="trackInputChanges()" />
+      
+                  <label> Item Tax</label>
+                   <input  type="number" class="form-control" name="itemTax" [(ngModel)]="items.itemTax" (ngModelChange)="trackInputChanges()" />
+      
+                   <label> Item Final Price</label>
+                   <input  type="number" class="form-control"  name="itemFinalPrice" [(ngModel)]="items.itemFinalPrice" (ngModelChange)="trackInputChanges()" />
+      
+                  <button
+                    class="btn btn-primary p-1"
+                    (click)="addItems(addItemForm.value)"
+                  >
+                    Add Items 
+                  </button>
+                  <button
+                    class="btn btn-secondary m-2 p-1"
+                    (click)="modal.close('Save click')"
+                  >
+                    close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+  </ng-template>
+  

@@ -7,6 +7,7 @@ import {
   NgForm,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from 'src/ApiServices/CustomerService';
 
@@ -21,11 +22,12 @@ export class AddCustomerComponent {
 
   constructor(
     private modalService: NgbModal,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private snackBar:MatSnackBar
   ) {}
 
   @Input()
-  set dataFromInvoiceComponent(data: any) {
+  set dataInaddCustomer(data: any) {
     this.customerData = data
     
     if (data != null && data.id != null) {
@@ -44,13 +46,21 @@ export class AddCustomerComponent {
     this.customerService
       .addCustomer(JSON.stringify(formData))
       .subscribe((res) => {
-        window.location.reload()
+        this.customerData.name=''
+        this.customerData.email=''
+        this.customerData.phone=''
+        this.customerData.address=''
+        this.customerData.notes=''
+        this.snackBar.open("customer created successfully",'cancel')
+        
+        
+        
+
       });
   }
 
   trackInputChanges()
   {
-    console.log(this.customerData
-      )
+  
   }
 }

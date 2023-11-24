@@ -3,10 +3,11 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CommonModalComponent } from "../common-modal/common-modal.component";
 import { CustomerData } from "src/models/CustomerData";
 import { CustomerService } from "src/ApiServices/CustomerService";
-import { ItemTableComponent } from "../item-table/item-table.component";
+import { InvoiceTableComponent } from "../invoice-table/invoice-table.component";
 import { InvoiceData } from "src/models/InvoiceData";
 import { InvoiceService } from "src/ApiServices/InvoiceService";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ChooseCustomerComponent } from "../choose-customer/choose-customer.component";
 
 @Component({
   selector: "app-create-bill",
@@ -14,50 +15,32 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ["./create-bill.component.css"],
 })
 export class CreateBillComponent implements OnInit {
-  dataToAddCustomerComponent: any;
+  dataToChild: any;
   customerData: any;
+  invoiceData:any
   tempData: any;
   tempItem: any;
  
 
-  @ViewChild(ItemTableComponent, { static: false })
-  itemTable!: ItemTableComponent;
+  @ViewChild(InvoiceTableComponent, { static: false })
+  itemTable!: InvoiceTableComponent;
+
 
   constructor(private customerService: CustomerService,private invoiceService:InvoiceService,private snackBar :MatSnackBar) {}
   ngOnInit(): void {
     this.customerService.getAllCustomers().subscribe((res) => {
       this.customerData = res;
-      console.log(this.customerData);
       this.tempData = res;
     });
   }
 
-  trackInputChanges() {
-    for (let i = 0; i < this.tempData.content.length; i++) {
-      this.tempItem = this.tempData.content[i];
+  
 
-      if (this.customerData.id === this.tempItem.id) {
-        this.customerData.name = this.tempItem.name;
-        this.customerData.address = this.tempItem.address;
-        this.customerData.email = this.tempItem.email;
-        this.customerData.city = this.tempItem.city;
-        this.customerData.phone = this.tempItem.phone;
-        this.customerData.notes = this.tempItem.notes;
-        console.log(this.customerData);
-        break;
-      }
-    }
-  }
-
-  submit(customerData: any, invoiceData: any) {
-    const tableData = this.itemTable.getTableData();
-    invoiceData=new InvoiceData('null',invoiceData.invoiceNumber,invoiceData.date,customerData.name,tableData,customerData.id)
-    this.invoiceService.createInvoiceOfCustomer(invoiceData).subscribe((response)=>{
-      
-      this.snackBar.open("invoice created successfully")
-      window.location.reload()
-
-    })
+  createInvoiceOfCustomer() {
+  const invoiceItems=this.itemTable.getTableItems()
+    this.invoiceData.invoiceItems=invoiceItems
+    console.log(invoiceItems)
+    
   }
 
   removeItem() {
@@ -72,6 +55,8 @@ export class CreateBillComponent implements OnInit {
   }
 
   showAddCustomerDialog() {
-    this.dataToAddCustomerComponent = { ...this };
+    this.dataToChild = { ...this };
   }
+
+  
 }

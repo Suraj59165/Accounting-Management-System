@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">Select Customer</div>
+    <div class="card-body">
+      <form #customerDataForm="ngForm" class="row g-3" >
+        
+        <div class="col-auto">
+          <select class="form-select" name="id" aria-label="Default select example" [(ngModel)]="customerData.id" (ngModelChange)="trackInputChanges()">
+            <option *ngFor="let customer of customerData.content" [value]="customer.id" selected>{{customer.name}}</option>
+          </select>
+        </div>
+
+        <div class="col-auto">
+          <label for="inputPassword2" class="visually-hidden">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputPassword2"
+            placeholder="name"
+            name="name"
+            [(ngModel)]="customerData.name"
+          />
+        </div>
+
+        <div class="col-auto">
+          <input
+            type="tel"
+            class="form-control"
+            id="inputPassword2"
+            placeholder="phone"
+            name="phone"
+            [(ngModel)]="customerData.phone"
+          />
+        </div>
+
+        <div class="col-auto">
+          <input
+            type="text"
+            class="form-control"
+            id="inputPassword2"
+            name="password"
+            placeholder="address"
+            [(ngModel)]="customerData.address"
+          />
+        </div>
+
+        <div class="col-auto">
+          <input
+            type="text"
+            class="form-control"
+            id="inputPassword2"
+            placeholder="notes"
+            name="notes"
+            [(ngModel)]="customerData.notes"
+          />
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary btn-sm mt-1">
+            remove
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

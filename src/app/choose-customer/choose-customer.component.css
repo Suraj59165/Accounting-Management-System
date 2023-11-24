@@ -1,6 +1,5 @@
-.hide{
-    display: none;
-}.form-control:focus {
+
+.form-control:focus {
     box-shadow: none;
     border-color: #ced4da;
      

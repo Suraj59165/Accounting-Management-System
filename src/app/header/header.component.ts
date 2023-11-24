@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  dataFromHeader:any;
+  dataFromHeaderComponent:any;
   constructor(private router:Router){}
   ngOnInit(): void {
     
@@ -18,10 +20,15 @@ export class HeaderComponent implements OnInit {
    this.router.navigateByUrl('/create-bill')
   }
 
-  addItems()
+  openAddItemPopUp()
   {
-    this.router.navigateByUrl('/add-items')
+    this.dataFromHeaderComponent={...this}
   }
   
+  openAddCustomerPopUp()
+  {
+    this.dataFromHeader={...this}
+    
+  }
 
 }

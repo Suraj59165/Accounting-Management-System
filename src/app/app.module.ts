@@ -18,8 +18,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddItemsComponent } from './add-items/add-items.component';
-import { ItemTableComponent } from './item-table/item-table.component';
+import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ChooseCustomerComponent } from './choose-customer/choose-customer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     CreateBillComponent,
     AddCustomerComponent,
     AddItemsComponent,
-    ItemTableComponent
+    InvoiceTableComponent,
+    ChooseCustomerComponent
   ],
   imports: [
     MatSnackBarModule,

@@ -1,0 +1,39 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+  }
+  .hide{
+    display: none;
+  }
+  
+  .form-container {
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-group {
+    margin: 10px 0;
+  }
+  input {
+    width: 150%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+     
+}
+
+  
+  
