@@ -5,10 +5,26 @@
       <form #customerDataForm="ngForm" class="row g-3" >
         
         <div class="col-auto">
+          
           <select class="form-select" name="id" aria-label="Default select example" [(ngModel)]="customerData.id" (ngModelChange)="trackInputChanges()">
+           
             <option *ngFor="let customer of customerData.content" [value]="customer.id" selected>{{customer.name}}</option>
+          
           </select>
         </div>
+
+        <div class="col-auto hidden">
+          <label for="inputPassword2" class="visually-hidden">id</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputPassword2"
+            placeholder="name"
+            name="id"
+            [(ngModel)]="customerData.id"
+          />
+        </div>
+
 
         <div class="col-auto">
           <label for="inputPassword2" class="visually-hidden">Name</label>
@@ -55,7 +71,7 @@
           />
         </div>
         <div class="col-auto">
-          <button type="submit" class="btn btn-primary btn-sm mt-1">
+          <button type="submit" class="btn btn-primary btn-sm mt-1" (click)="removeCustomer()">
             remove
           </button>
         </div>

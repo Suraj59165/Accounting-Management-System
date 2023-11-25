@@ -7,15 +7,19 @@ import { InvoiceService } from 'src/ApiServices/InvoiceService';
   templateUrl: './choose-customer.component.html',
   styleUrls: ['./choose-customer.component.css']
 })
-export class ChooseCustomerComponent {
+export class ChooseCustomerComponent implements OnInit {
   customerData:any;
   customerId:any
   tempData:any;
-  tempCustomer:any
+  tempCustomer:any;
+  tempCustomerData:any;
 
-  constructor(private apiServie:CustomerService )
+  constructor(private apiService:CustomerService )
   {
-    apiServie.getAllCustomers().subscribe((response)=>{
+   
+  }
+  ngOnInit(): void {
+    this.apiService.getAllCustomers().subscribe((response)=>{
       this.customerData=response;
       this.tempData=response;
       
@@ -24,7 +28,21 @@ export class ChooseCustomerComponent {
 
   getData()
   {
-    return this.customerData;
+
+    return this.tempCustomerData;
+
+  }
+
+  removeCustomer()
+  {
+    this.customerData.name = "";
+    this.customerData.email = "";
+    this.customerData.city = "";
+    this.customerData.address = "";
+    this.customerData.notes = "";
+    this.apiService.getAllCustomers().subscribe((res) => {
+      this.customerData = res;
+    });
   }
 
   trackInputChanges()
@@ -32,8 +50,8 @@ export class ChooseCustomerComponent {
     
       for (let i = 0; i < this.tempData.content.length; i++) {
         this.tempCustomer = this.tempData.content[i];
-  
         if (this.customerData.id === this.tempCustomer.id) {
+          this.tempCustomerData=this.tempCustomer
           this.customerData.name = this.tempCustomer.name;
           this.customerData.address = this.tempCustomer.address;
           this.customerData.email = this.tempCustomer.email;

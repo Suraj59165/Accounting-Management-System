@@ -9,24 +9,55 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-8">
-                <label> Name</label>
-                <input  type="text" class="form-control" #name="ngModel"  required name="name" [(ngModel)]="customerData.name" />
+
+                <div class="row-g-4">
+                  <label> Name</label>
+                  <input  type="text" class="form-control" #name="ngModel"  required name="name" [(ngModel)]="customerData.name" />
+                </div>
+                <div
+                *ngIf="
+                  customerForm.controls['name'].invalid &&
+                  customerForm.controls['name'].touched"
+                class="text-danger" >
+                Name is compulsory
+              </div>
+
+
+
+                <div class="row-g-3">
+                  <label> Email</label>
+                  <input  type="text" class="form-control" name="email" [(ngModel)]="customerData.email" />
+
+                </div>
+
+                <div class="row-g-3">
+                  <label> Phone</label>
+                  <input  type="text" class="form-control" name="phone" [(ngModel)]="customerData.phone" />
+                  
+                  
+
+                </div>
+
+                <div class="row-g-3">
+                  <label> Address</label>
+                  <input  type="text" class="form-control" name="address" [(ngModel)]="customerData.address">
+                  
+
+                </div>
+
+
+                <div class="row-g-3">
+                  <label> Notes</label>
+                  <input  type="text" class="form-control"  name="notes" [(ngModel)]="customerData.notes" />
+                  
+
+                </div>
+                
     
-                <label> Email</label>
-                 <input  type="text" class="form-control" name="email" [(ngModel)]="customerData.email" />
-    
-                <label> Phone</label>
-                 <input  type="text" class="form-control" name="phone" [(ngModel)]="customerData.phone" />
-    
-                <label> Address</label>
-                 <input  type="text" class="form-control" name="address" [(ngModel)]="customerData.address" />
-    
-                 <label> Notes</label>
-                 <input  type="text" class="form-control"  name="notes" [(ngModel)]="customerData.notes" />
-    
+               
                 <button
                   class="btn btn-primary p-1"
-                  (click)="submitForm(customerForm.value)"
+                  (click)="submitForm(customerForm.value,customerForm)"
                 >
                   Add Customer 
                 </button>

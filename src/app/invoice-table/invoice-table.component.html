@@ -27,7 +27,9 @@
       <table class="table table-bordered">
         <thead>
           <tr>
+            
             <th scope="col">items</th>
+            <th scope="col" class="hidden">item Id</th>
             <th scope="col">Item Name</th>
             <th scope="col">Sale Price</th>
             <th scope="col">Quantity</th>
@@ -39,12 +41,28 @@
         </thead>
         <tbody>
           <tr *ngFor="let items of invoiceItems; let i = index">
-            
+           
             <div class="col-auto">
               <select class="form-select" name="id" aria-label="Default select example" [(ngModel)]="invoiceItemsData.id" (ngModelChange)="trackChanges(i)">
                 <option *ngFor="let item of invoiceItemsData.content" [value]="item.id" selected>{{item.itemName}}</option>
               </select>
             </div>
+
+
+            <td class="hidden">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="items.id"
+                name="id{{ i }}"
+                #id="ngModel"
+                required
+                (ngModelChange)="trackInputChanges($event, i)"
+              />
+            
+            </td>
+
+
             <td>
               <input
                 type="text"
@@ -59,6 +77,8 @@
                 >item name is required</small
               >
             </td>
+
+            
 
             <td>
               <input

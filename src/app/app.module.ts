@@ -21,6 +21,8 @@ import { AddItemsComponent } from './add-items/add-items.component';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ChooseCustomerComponent } from './choose-customer/choose-customer.component';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { ChooseCustomerComponent } from './choose-customer/choose-customer.compo
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxUiLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,47 +1,117 @@
 <ng-template #addItemModal let-modal>
-    <div class="card">
-      <div class="card-header">
-        Add Item Details
-      </div>
-    
-        <div class="modal-body">
-          <form #addItemForm="ngForm" >
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-8">
-                  <label> Item Name</label>
-                  <input  type="text" class="form-control"  name="itemName" [(ngModel)]="items.itemName" />
-      
-                  <label> Item Sale Price</label>
-                   <input  type="number" class="form-control" name="itemSalesPrice" [(ngModel)]="items.itemSalesPrice"  (ngModelChange)="trackInputChanges()" />
-      
-                  <label> Item Offer</label>
-                   <input  type="number" class="form-control" name="itemOffer" [(ngModel)]="items.itemOffer" (ngModelChange)="trackInputChanges()" />
-      
-                  <label> Item Tax</label>
-                   <input  type="number" class="form-control" name="itemTax" [(ngModel)]="items.itemTax" (ngModelChange)="trackInputChanges()" />
-      
-                   <label> Item Final Price</label>
-                   <input  type="number" class="form-control"  name="itemFinalPrice" [(ngModel)]="items.itemFinalPrice" (ngModelChange)="trackInputChanges()" />
-      
-                  <button
-                    class="btn btn-primary p-1"
-                    (click)="addItems(addItemForm.value)"
-                  >
-                    Add Items 
-                  </button>
-                  <button
-                    class="btn btn-secondary m-2 p-1"
-                    (click)="modal.close('Save click')"
-                  >
-                    close
-                  </button>
+  <div class="card">
+    <div class="card-header">Add Item Details</div>
+
+    <div class="modal-body">
+      <form #addItemForm="ngForm">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="row-g-3">
+                <label> Item Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  #itemName="ngModel"
+                  required
+                  name="itemName"
+                  [(ngModel)]="items.itemName"
+                />
+                <div
+                  *ngIf="
+                    addItemForm.controls['itemName'].invalid &&
+                    addItemForm.controls['itemName'].touched
+                  "
+                  class="text-danger"
+                >
+                  Item name is required.
                 </div>
               </div>
+
+              <div class="row-g-3">
+                <label> Item Sale Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  required
+                  #itemSalesPrice="ngModel"
+                  name="itemSalesPrice"
+                  [(ngModel)]="items.itemSalesPrice"
+                  (ngModelChange)="trackInputChanges()"
+                />
+                <div
+                  *ngIf="
+                    addItemForm.controls['itemSalesPrice'].invalid &&
+                    addItemForm.controls['itemSalesPrice'].touched
+                  "
+                  class="text-danger"
+                >
+                  Item sale price is required.
+                </div>
+              </div>
+
+              <div class="row-g-3">
+                <label> Item Offer</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="itemOffer"
+                  [(ngModel)]="items.itemOffer"
+                  (ngModelChange)="trackInputChanges()"
+                />
+              </div>
+
+              <div class="row-g-3">
+                <label> Item Tax</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="itemTax"
+                  [(ngModel)]="items.itemTax"
+                  (ngModelChange)="trackInputChanges()"
+                />
+              </div>
+
+              <div class="row-g-4">
+                <label> Item Final Price</label>
+                <input
+                  readonly
+                  type="number"
+                  required
+                  class="form-control"
+                  #itemFinalPrice="ngModel"
+                  name="itemFinalPrice"
+                  [(ngModel)]="items.itemFinalPrice"
+                  (ngModelChange)="trackInputChanges()"
+                />
+
+                <div
+                  *ngIf="
+                    addItemForm.controls['itemFinalPrice'].invalid &&
+                    addItemForm.controls['itemFinalPrice'].touched
+                  "
+                  class="text-danger"
+                >
+                    required
+                </div>
+              </div>
+
+              <button
+                class="btn btn-primary p-1"
+                (click)="addItems(addItemForm.value, addItemForm)"
+              >
+                Add Items
+              </button>
+              <button
+                class="btn btn-secondary m-2 p-1"
+                (click)="modal.close('Save click')"
+              >
+                close
+              </button>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
-    
-  </ng-template>
-  
+      </form>
+    </div>
+  </div>
+</ng-template>

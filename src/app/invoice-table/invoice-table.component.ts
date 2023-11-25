@@ -30,7 +30,7 @@ export class InvoiceTableComponent implements OnInit {
   invoiceItems: any[] = [
     
     {
-      id:"",
+      id:null,
       itemName: "",
       itemSalesPrice: null,
       itemQuantity: null,
@@ -50,14 +50,14 @@ export class InvoiceTableComponent implements OnInit {
     for (let i = 0; i < this.tempInvoiceItemData.content.length; i++) {
       this.tempItem = this.tempInvoiceItemData.content[i];
       if (this.invoiceItemsData.id === this.tempItem.id) {
-
+        
+        this.invoiceItems[index].id=this.tempItem.id;
         this.invoiceItems[index].itemName= this.tempItem.itemName;
         this.invoiceItems[index].itemTax= this.tempItem.itemTax;
         this.invoiceItems[index].itemOffer= this.tempItem.itemOffer;
         this.invoiceItems[index].itemSalesPrice= this.tempItem.itemSalesPrice;
         this.invoiceItems[index].itemQuantity= this.tempItem.itemQuantity;
         this.invoiceItems[index].itemFinalPrice= this.tempItem.itemFinalPrice;
-
         break;
       }
     }
@@ -87,14 +87,13 @@ export class InvoiceTableComponent implements OnInit {
 
   getTableItems()
   {
+  
     return this.invoiceItems;
   }
 
   getTableData():any {
-    console.log("ok")
-   console.log(this.invoiceItems)
-   console.log()
-   return new InvoiceData('',this.invoiceNumber,this.invoiceDate,'suraj',[],this.getCustomerData.getData().id);
+  
+   return new InvoiceData('',this.invoiceNumber,this.invoiceDate,this.getCustomerData.getData().name,[],this.getCustomerData.getData().id);
    
   }
 
