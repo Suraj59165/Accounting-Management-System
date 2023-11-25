@@ -21,6 +21,7 @@ export class TableComponent implements OnInit {
   sortBy: string = "invoiceNumber";
   sortDirection: string = "asc";
   dataToChild:any;
+  data:any;
 
 
   constructor(private service: ListingServices,private invoiceService:InvoiceService,private loader:NgxUiLoaderService) {}
@@ -59,7 +60,8 @@ export class TableComponent implements OnInit {
   viewData(viewData : InvoiceData)
   {
     
-    alert("available soon")
+    this.data={...viewData}
+
   }
 
   DeleteData(deleteData : InvoiceData)

@@ -22,6 +22,7 @@ import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ChooseCustomerComponent } from './choose-customer/choose-customer.component';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { ViewDataComponent } from './view-data/view-data.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     AddCustomerComponent,
     AddItemsComponent,
     InvoiceTableComponent,
-    ChooseCustomerComponent
+    ChooseCustomerComponent,
+    ViewDataComponent
   ],
   imports: [
     MatSnackBarModule,

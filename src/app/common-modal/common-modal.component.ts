@@ -51,6 +51,12 @@ export class CommonModalComponent {
        this.openModal(this.openPopUp);
     }
   }
+ 
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef= this.modalService.open(template, { size: 'lg' });
+  }
+
   updateData()
   {
     this.loader.start()
@@ -70,10 +76,6 @@ export class CommonModalComponent {
     this.apiService.deleteInvoiceItems(invoiceItemId).subscribe((res)=>{
       this.openModal(this.openPopUp);
     })
-  }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef= this.modalService.open(template, { size: 'lg' });
   }
 
  
