@@ -13,6 +13,35 @@
           <b>{{ invoiceData.createdAt }}</b>
         </div>
       </div>
+      <table class="table table-bordered mt-2" >
+        <thead >
+            <tr>
+                <th >item Name</th>
+                <th>item Sales Price</th>
+                <th>item Quantity</th>
+                <th>item Offer(%)</th>
+                <th>item Tax(%)</th>
+                <th>item Final Price</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let invoiceItems of invoiceData.invoiceItems">
+            <td>{{invoiceItems.itemName}}</td>
+            <td>{{invoiceItems.itemSalesPrice}}</td>
+            <td>{{invoiceItems.itemQuantity}}</td>
+            <td>{{invoiceItems.itemOffer}}</td>
+            <td>{{invoiceItems.itemTax}}</td>
+            <td>{{invoiceItems.itemFinalPrice}}</td>
+            
+
+
+        </tbody>
+     
+        
+      </table>
+     
+     
+
+     
       
 
     </form>
