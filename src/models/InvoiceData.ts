@@ -1,7 +1,7 @@
 export class InvoiceData {
   public id: any;
   public invoiceNumber: number;
-  public createdAt: Date;
+  public createdAt: any;
   public customerName: string;
   public invoiceItems: {
     id: string;
@@ -17,7 +17,7 @@ export class InvoiceData {
   constructor(
     id: any,
     invoiceNumber: number,
-    createdAt: Date,
+    createdAt: any,
     customerName: string,
     invoiceItems: {
       id: string;

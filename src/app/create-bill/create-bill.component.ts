@@ -79,13 +79,13 @@ export class CreateBillComponent implements OnInit {
           window.location.href = "";
         },(error)=>{
           this.loader.stop();
-          this.snackBar.open("invoice number already")
+          this.snackBar.open("invoice number already exists")
 
         });
     }
     else
     {
-      this.snackBar.open("error occured")
+      this.snackBar.open("quantity required")
     }
   }
 

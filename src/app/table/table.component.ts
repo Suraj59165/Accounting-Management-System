@@ -22,6 +22,7 @@ export class TableComponent implements OnInit {
   sortDirection: string = "asc";
   dataToChild:any;
   data:any;
+  selectedCustomer:any;
 
 
   constructor(private service: ListingServices,private invoiceService:InvoiceService,private loader:NgxUiLoaderService) {}
@@ -79,6 +80,12 @@ export class TableComponent implements OnInit {
     
     this.dataToChild={...editData}
 
+  }
+
+  searchCustomer()
+  {
+
+    console.log(this.selectedCustomer)
   }
 
 

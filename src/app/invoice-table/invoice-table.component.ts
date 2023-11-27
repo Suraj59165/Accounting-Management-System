@@ -88,7 +88,9 @@ export class InvoiceTableComponent implements OnInit {
 
   getTableData(): any {
     const invoiceNumber = this.invoiceNumber;
-    const date = this.invoiceData;
+    const date = this.invoiceDate;
+   
+    console.log(date)
     if (invoiceNumber == null && date == null) {
       this.snackBar.open("plese fill are required fields");
       return
@@ -96,7 +98,7 @@ export class InvoiceTableComponent implements OnInit {
       return new InvoiceData(
         "",
         this.invoiceNumber,
-        this.invoiceDate,
+        date,
         this.getCustomerData.getData().name,
         [],
         this.getCustomerData.getData().id
