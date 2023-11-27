@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerService } from 'src/ApiServices/CustomerService';
 import { InvoiceService } from 'src/ApiServices/InvoiceService';
 
@@ -14,7 +15,7 @@ export class ChooseCustomerComponent implements OnInit {
   tempCustomer:any;
   tempCustomerData:any;
 
-  constructor(private apiService:CustomerService )
+  constructor(private apiService:CustomerService,private snackBar:MatSnackBar )
   {
    
   }
@@ -29,17 +30,25 @@ export class ChooseCustomerComponent implements OnInit {
   getData()
   {
 
-    return this.tempCustomerData;
+    if(this.tempCustomerData==null)
+    {
+      this.snackBar.open("please choose customer")
+    }
+    else{
+      return this.tempCustomerData;
+    }
+    
 
   }
 
   removeCustomer()
   {
-    this.customerData.name = "";
-    this.customerData.email = "";
-    this.customerData.city = "";
-    this.customerData.address = "";
-    this.customerData.notes = "";
+    this.tempCustomerData=null
+    this.customerData.name = null;
+    this.customerData.email = null;
+    this.customerData.city = null;
+    this.customerData.address = null;
+    this.customerData.notes = null;
     this.apiService.getAllCustomers().subscribe((res) => {
       this.customerData = res;
     });

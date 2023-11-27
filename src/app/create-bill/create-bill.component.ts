@@ -9,6 +9,7 @@ import { InvoiceService } from "src/ApiServices/InvoiceService";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChooseCustomerComponent } from "../choose-customer/choose-customer.component";
 import { NgxUiLoaderService } from "ngx-ui-loader";
+import { error } from "jquery";
 
 @Component({
   selector: "app-create-bill",
@@ -29,8 +30,7 @@ export class CreateBillComponent implements OnInit {
     private customerService: CustomerService,
     private invoiceService: InvoiceService,
     private snackBar: MatSnackBar,
-    private loader:NgxUiLoaderService
-
+    private loader: NgxUiLoaderService
   ) {}
   ngOnInit(): void {
     this.customerService.getAllCustomers().subscribe((res) => {
@@ -40,15 +40,53 @@ export class CreateBillComponent implements OnInit {
   }
 
   createInvoiceOfCustomer() {
-    this.loader.start()
+    //this.loader.start()
     const invoiceItems = this.itemTable.getTableItems();
+    console.log(invoiceItems);
     this.invoiceData = this.itemTable.getTableData();
     this.invoiceData.invoiceItems = invoiceItems;
-    console.log(JSON.stringify(this.invoiceData))
-    this.invoiceService.createInvoiceOfCustomer(JSON.stringify(this.invoiceData)).subscribe((response)=>{
-      this.loader.stop()
-      window.location.href=""
-    })
+    console.log(invoiceItems.length);
+    if (invoiceItems.length == 0) {
+      this.snackBar.open("please add atleast one row to add item");
+      return;
+    }
+    if (invoiceItems[0].id == null) {
+      this.snackBar.open("please choose atleast one item");
+      return;
+    }
+
+    let result = false;
+    invoiceItems.forEach((items) => {
+      if (items.itemQuantity === undefined) {
+        this.snackBar.open("atleast choose one quantity")
+      
+      }
+      else
+      { result=true
+
+      }
+     
+    });
+
+    if (result) {
+      this.loader.start();
+      this.invoiceService
+        .createInvoiceOfCustomer(JSON.stringify(this.invoiceData))
+        .subscribe((response) => {
+          
+          this.loader.stop();
+          this.snackBar.open("invoice created successfully", "cancel");
+          window.location.href = "";
+        },(error)=>{
+          this.loader.stop();
+          this.snackBar.open("invoice number already")
+
+        });
+    }
+    else
+    {
+      this.snackBar.open("error occured")
+    }
   }
 
   removeItem() {

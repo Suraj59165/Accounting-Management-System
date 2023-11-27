@@ -63,18 +63,7 @@ export class AddCustomerComponent {
       }
     }
 
-    this.customerService
-      .addCustomer(JSON.stringify(formData))
-      .subscribe((res) => {
-        this.customerData.name = "";
-        this.customerData.email = "";
-        this.customerData.phone = "";
-        this.customerData.address = "";
-        this.customerData.notes = "";
-        this.loader.stop();
-        this.snackBar.open("customer created successfully", "cancel");
-      });
+    
   }
 
-  trackInputChanges() {}
 }

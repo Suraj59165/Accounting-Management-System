@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-auto">
           <label>Choose Date</label>
-          <input type="date"  class="form-control" [(ngModel)]="invoiceDate"  />
+          <input type="date" class="form-control" [(ngModel)]="invoiceDate" />
         </div>
 
         <div class="col-auto">
@@ -18,148 +18,68 @@
   <div class="mt-2">
     <app-choose-customer></app-choose-customer>
   </div>
-  
 
-  <div class="card mt-2 ">
+  <div class="card mt-2">
     <div class="card-header">Choose Items</div>
     <div class="card-body">
-      
       <table class="table table-bordered">
-        <thead>
+        <thead class="thead-dark">
           <tr>
-            
-            <th scope="col">items</th>
-            <th scope="col" class="hidden">item Id</th>
+            <th scope="col">Item</th>
+            <th scope="col" class="hidden">Item Id</th>
             <th scope="col">Item Name</th>
             <th scope="col">Sale Price</th>
             <th scope="col">Quantity</th>
-            <th scope="col">Offer(%)</th>
-            <th scope="col">Tax(%)</th>
+            <th scope="col">Offer (%)</th>
+            <th scope="col">Tax (%)</th>
             <th scope="col">Final Price</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let items of invoiceItems; let i = index">
-           
-            <div class="col-auto">
+            <td>
               <select class="form-select" name="id" aria-label="Default select example" [(ngModel)]="invoiceItemsData.id" (ngModelChange)="trackChanges(i)">
-                <option *ngFor="let item of invoiceItemsData.content" [value]="item.id" selected>{{item.itemName}}</option>
+                <option *ngFor="let item of invoiceItemsData.content" [value]="item.id" selected>{{ item.itemName }}</option>
               </select>
-            </div>
-
-
+            </td>
             <td class="hidden">
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="items.id"
-                name="id{{ i }}"
-                #id="ngModel"
-                required
-                (ngModelChange)="trackInputChanges($event, i)"
-              />
-            
-            </td>
-
-
-            <td>
-              <input
-                type="text"
-                class="form-control in-valid"
-                #itemName="ngModel"
-                [class.in-valid]="itemName.invalid"
-                [(ngModel)]="items.itemName"
-                name="itemName{{ i }}"
-                required
-              />
-              <small [class.d-none]="itemName.valid || itemName.untouched"
-                >item name is required</small
-              >
-            </td>
-
-            
-
-            <td>
-              <input
-                type="number"
-                class="form-control"
-                [(ngModel)]="items.itemSalesPrice"
-                name="itemSalesPrice{{ i }}"
-                #itemSalesPrice="ngModel"
-                required
-                (ngModelChange)="trackInputChanges($event, i)"
-              />
-              <small
-                [class.d-none]="
-                  itemSalesPrice.valid || itemSalesPrice.untouched
-                "
-                >item sale price is required</small
-              >
-            </td>
-
-            <td>
-              <input
-                type="number"
-                class="form-control"
-                [(ngModel)]="items.itemQuantity"
-                required
-                name="itemQuantity{{ i }}"
-                #itemQuantity="ngModel"
-                (ngModelChange)="trackInputChanges($event, i)"
-              />
-              <small
-                [class.d-none]="itemQuantity.valid || itemQuantity.untouched"
-                >Quantity is required</small
-              >
-            </td>
-
-            <td>
-              <input
-                type="number"
-                #itemOffer="ngModel"
-                [(ngModel)]="items.itemOffer"
-                (ngModelChange)="trackInputChanges($event, i)"
-                class="form-control"
-                name="itemOffer{{ i }}"
-              />
+              <input type="text" class="form-control" [(ngModel)]="items.id" name="id{{ i }}" #id="ngModel" required (ngModelChange)="trackInputChanges($event, i)" />
             </td>
             <td>
-              <input
-                type="number"
-                required
-                [(ngModel)]="items.itemTax"
-                (ngModelChange)="trackInputChanges($event, i)"
-                class="form-control"
-                name="itemTax{{ i }}"
-              />
+              <input type="text" class="form-control" #itemName="ngModel" [class.is-invalid]="itemName.invalid && itemName.touched" [(ngModel)]="items.itemName" name="itemName{{ i }}" required />
+              <small class="text-danger" *ngIf="itemName.invalid && itemName.touched">Item name is required</small>
             </td>
             <td>
-              <input
-                type="number"
-                class="form-control"
-                [(ngModel)]="items.itemFinalPrice"
-                name="itemFinalPrice{{ i }}"
-                #itemFinalPrice="ngModel"
-                readonly
-                (ngModelChange)="trackInputChanges($event, i)"
-              />
+              <input type="number" class="form-control" [(ngModel)]="items.itemSalesPrice" name="itemSalesPrice{{ i }}" #itemSalesPrice="ngModel" required (ngModelChange)="trackInputChanges($event, i)" />
+              <small class="text-danger" *ngIf="itemSalesPrice.invalid && itemSalesPrice.touched">Item sale price is required</small>
             </td>
             <td>
-              <button class="btn btn-danger btn-sm" (click)="deleteRow(i)">
-                Delete
-              </button>
+              <input type="number" class="form-control" [(ngModel)]="items.itemQuantity" required name="itemQuantity{{ i }}" #itemQuantity="ngModel" (ngModelChange)="trackInputChanges($event, i)" />
+              <small class="text-danger" *ngIf="itemQuantity.invalid && itemQuantity.touched">Quantity is required</small>
+            </td>
+            <td>
+              <input type="number" #itemOffer="ngModel" [(ngModel)]="items.itemOffer" (ngModelChange)="trackInputChanges($event, i)" class="form-control" name="itemOffer{{ i }}" />
+            </td>
+            <td>
+              <input type="number" required [(ngModel)]="items.itemTax" (ngModelChange)="trackInputChanges($event, i)" class="form-control" name="itemTax{{ i }}" />
+            </td>
+            <td>
+              <input type="number" class="form-control" [(ngModel)]="items.itemFinalPrice" name="itemFinalPrice{{ i }}" #itemFinalPrice="ngModel" readonly (ngModelChange)="trackInputChanges($event, i)" />
+            </td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteRow(i)">Delete</button>
             </td>
           </tr>
         </tbody>
 
-        <div class="m-2">
-          <button class="btn btn-sm btn-danger" (click)="addRow()">
-            Add Row
-          </button>
-
-        </div>
-        
+        <tfoot>
+          <tr>
+            <td colspan="8" class="text-right">
+              <button class="btn btn-sm btn-danger" (click)="addRow()">Add Row</button>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>

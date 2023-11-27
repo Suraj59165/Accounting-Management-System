@@ -19,7 +19,6 @@ export class CommonModalComponent {
   modalRef:any;
 
   constructor(private modalService: NgbModal,
-    private invoiceService:InvoiceService,
     private apiService:ListingServices,private loader:NgxUiLoaderService,
     private snackBar:MatSnackBar
     ) {}
@@ -60,9 +59,7 @@ export class CommonModalComponent {
   updateData()
   {
     this.loader.start()
- 
    this.apiService.updateInvoice(this.invoiceData.invoiceNumber,JSON.stringify(this.invoiceData)).subscribe((res)=>{
-
    this.loader.stop()
       this.modalRef.close()
       
